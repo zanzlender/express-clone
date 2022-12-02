@@ -1,8 +1,5 @@
-import http from "http";
+import { CreateServer } from "./lib/index";
 
-http
-  .createServer(function (req, res) {
-    res.write("Hello world");
-    res.end();
-  })
-  .listen(8080);
+const server = CreateServer({
+  port: 8080,
+});
