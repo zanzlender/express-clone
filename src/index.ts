@@ -1,3 +1,8 @@
-import fs from "fs";
+import http from "http";
 
-console.log("His");
+http
+  .createServer(function (req, res) {
+    res.write("Hello world");
+    res.end();
+  })
+  .listen(8080);
