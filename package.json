@@ -1,7 +1,7 @@
 {
   "name": "express-clone",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project is a simple clone of ExpressJS written in TypeScript. It was made as part of a project for the subject Multiagent systems at the Faculty of Organization and Informatics in Varaždin.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,7 +10,7 @@
   "type": "module",
   "keywords": [],
   "author": "Žan Žlender",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "@types/node": "^18.11.10",
     "@typescript-eslint/eslint-plugin": "^5.45.0",
