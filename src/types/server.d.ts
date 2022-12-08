@@ -29,6 +29,10 @@ export interface RequestType extends IncomingMessage {
 
 export type ServerInitProps = StaticServerProps | RestServerProps;
 
+/**
+ * @param folder path to folder to serve relative to the root folder of the project
+ * @param port port number
+ */
 type StaticServerProps = {
   type: "static";
   path: string;
