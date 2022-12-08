@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" type="text/css" href="index.css">
+</head>
+
+<body>
+  <main class="container">
+    <nav class="navigation">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="page_one.html">Image test</a></li>
+        <li><a href="page_two.html">JavaScript test</a></li>
+        <li><a href="page_three.html">Files test</a></li>
+      </ul>
+    </nav>
+
+    <div class="content-container">
+      <h1>Check if images can be loaded...</h1>
+
+      <section class="gallery">
+        <div class="gallery-items-container">
+          <div class="gallery-item-container">
+            <div class="gallery-item">
+              <img
+                src="https://images.unsplash.com/photo-1670180399804-42701f598ff3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80"
+                alt="Toothbrush wrapped with a string to a sponge." />
+            </div>
+            <p>Example of externally loaded image</p>
+          </div>
+
+          <div class="gallery-item-container">
+            <div class="gallery-item">
+              <img src="./assets/valley.jpg" alt="Black and red valley." />
+            </div>
+            <p>Example of locally loaded image</p>
+          </div>
+        </div>
+      </section>
+
+      <a href="page_two.html">
+        <button style="padding: 15px 30px; font-size: 1.25rem;" class="btn">Go to next example</button>
+      </a>
+    </div>
+  </main>
+</body>
+
+</html>
