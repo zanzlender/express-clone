@@ -26,3 +26,25 @@ export interface RequestType extends IncomingMessage {
   params: Record<string, any>;
   [_: string]: any;
 }
+
+export type ServerInitProps = StaticServerProps | RestServerProps;
+
+type StaticServerProps = {
+  type: "static";
+  path: string;
+  folder: string;
+  port: number;
+};
+
+type RestServerProps = {
+  type: "rest";
+  path: string;
+  routes: Array<>;
+  port: number;
+};
+
+type RouteProps = {
+  path: string;
+  method: ReqType;
+  work: (req: IncomingMessage, res: ServerResponse) => ServerResponse;
+};
