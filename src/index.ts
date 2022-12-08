@@ -1,12 +1,12 @@
 import { CreateServer } from "./lib/index";
-import { initializeServer } from "./lib/initServer_v2";
+import { initializeServer } from "./lib/server";
 import qs from "query-string";
 
 const server = initializeServer({
   type: "static",
   path: "/",
   port: 3000,
-  folder: "/public",
+  folder: "public",
 });
 
 /**

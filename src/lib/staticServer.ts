@@ -1,47 +1,15 @@
-import { RestServerProps, ServerInitProps, StaticServerProps } from "../types/server";
+import { StaticServerProps } from "../types/server";
 import http from "http";
 import fs from "fs";
-
-export const initializeServer = async (args: ServerInitProps) => {
-  const port = args.port || 3000;
-
-  const server = await CreateServer(args);
-
-  server.listen(port, () => {
-    console.log(`Server started! Listening on port: ${port}.`);
-  });
-
-  return server;
-};
-
-/**
- * Call Create static or rest server depending on passed args.
- */
-async function CreateServer(args: ServerInitProps) {
-  switch (args.type) {
-    case "rest": {
-      const server = await CreateRestServer({
-        ...args,
-      });
-      return server;
-    }
-    case "static": {
-      const server = await CreateStaticServer({
-        ...args,
-      });
-      return server;
-    }
-  }
-}
 
 /**
  * Creates a static server instance.
  */
 async function CreateStaticServer(args: StaticServerProps) {
   const server = http.createServer((req, res) => {
-    fs.readFile(`public/${req.url}`, (err, data) => {
-      console.log(data);
+    const filePath = `${args.folder}/${req.url}`;
 
+    fs.readFile(filePath, (err, data) => {
       if (err == null) {
         const type = req.url?.split(".");
 
@@ -85,7 +53,8 @@ async function CreateStaticServer(args: StaticServerProps) {
         res.write(data);
         res.end();
       } else {
-        res.write("404 - Not found");
+        res.statusCode = 404;
+        res.write("NOT_FOUND");
         res.end();
       }
     });
@@ -94,15 +63,4 @@ async function CreateStaticServer(args: StaticServerProps) {
   return server;
 }
 
-/**
- * Creates a REST server instance.
- */
-async function CreateRestServer(args: RestServerProps) {
-  const server = http.createServer((req, res) => {
-    console.log(req.url);
-    res.write("Hi");
-    res.end();
-  });
-
-  return server;
-}
+export default CreateStaticServer;
