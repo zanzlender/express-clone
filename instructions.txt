@@ -1,0 +1,9 @@
+Koraci za pokretanje
+
+1. Instalirati NodeJS LTS verziju
+2. Instalirati pnpm sa narednom - npm install -g pnpm
+3. Pozicionirati se u root mapu
+4. U terminalu pokrenuti naredbu - pnpm install
+5. Za pokretanje gotovog primjera servera izvršiti naredbu
+	- pnpm run dev
+6. U web pregledniku otvori url: localhost:8080
