@@ -1,22 +1,33 @@
-import { CreateServer } from "./lib/index";
-import { initializeServer } from "./lib/server";
-import qs from "query-string";
+import { initializeServer } from "./lib/index";
 
-const server = initializeServer({
+// Static server example
+/* const staticServer = initializeServer({
   type: "static",
   path: "/",
   port: 3000,
   folder: "public",
-});
+}); */
 
-/**
- * Parses url
- *
- * /api/user/:id
- * /api/user/:id/update
- * @param url
- */
-function ParseUrl(url: string) {
-  const paths = url.split("/");
-  console.log(paths);
-}
+// REST server example
+const restServer = initializeServer({
+  type: "rest",
+  port: 3000,
+  routes: [
+    {
+      method: "GET",
+      path: "/users/:id/edit/:id2",
+      work: (req, res) => {
+        res.statusCode = 200;
+        res.end("Hija");
+      },
+    },
+    {
+      method: "GET",
+      path: "/users/:id",
+      work: (req, res) => {
+        res.statusCode = 200;
+        res.end("Hija2");
+      },
+    },
+  ],
+});
