@@ -118,13 +118,15 @@ li {
 
 .javascript-box {
   width: 600px;
-  height: 100px;
+  min-height: 100px;
+  height: auto;
   display: flex;
   flex-direction: column;
   gap: 0.6rem;
   justify-content: center;
   align-items: center;
   border: 2px dashed gainsboro;
+  padding: 10px 20px;
 }
 
 .btn {
