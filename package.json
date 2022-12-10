@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
-    "dev": "npx nodemon",
+    "dev": "concurrently \"ts-node ./public/example_rest/index.ts\" \"ts-node ./public/example_static/index.ts\"",
     "start": "npm run build && node build/index.js",
-    "postinstall": "prisma generate"
+    "postinstall": "(pnpm bin)/pm2 install typescript && prisma generate"
   },
   "keywords": [],
   "author": "Žan Žlender",
@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "@prisma/client": "^4.7.1",
+    "concurrently": "^7.6.0",
     "query-string": "^7.1.3"
   }
 }
