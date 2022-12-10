@@ -1,4 +1,4 @@
-import { initializeServer } from "../../src/lib/index";
+import { initializeServer } from "./lib/index";
 
 // Static server example
 initializeServer({
