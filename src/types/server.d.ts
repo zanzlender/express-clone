@@ -28,6 +28,7 @@ export type RouteProps = {
 
 export type ExtendedIncommingMessage<T extends RequestParams> = IncomingMessage & {
   params?: T;
+  body?: T;
 };
 
 export type RequestParams = Record<string, string>;

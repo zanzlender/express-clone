@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "rimraf ./build && tsc",
-    "dev": "concurrently \"ts-node ./public/example_rest/index.ts\" \"ts-node ./public/example_static/index.ts\"",
+    "dev": "concurrently \"ts-node ./src/static_example.ts\" \"ts-node ./src/rest_example.ts\"",
     "start": "npm run build && node build/index.js",
     "postinstall": "(pnpm bin)/pm2 install typescript && prisma generate"
   },

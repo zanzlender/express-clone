@@ -1,4 +1,5 @@
-import { RequestParams } from "../types/server";
+import { IncomingMessage } from "http";
+import { ReqType, RequestParams } from "../types/server";
 
 /**
  * Takes in a user defined path and the request url. It parses the dynamic
@@ -60,9 +61,9 @@ export function ParseUrlParams({ url, path }: ParseUrlParamsProps) {
  * @param paths paths of the api endpoints
  * @returns Array of regex expressions for given paths
  */
-export function GetRegexForPaths(paths: Array<string>) {
+export function GetRegexForPaths(paths: Array<{ path: string; id: number; method: ReqType }>) {
   const regexForPaths = paths.map((p) => {
-    const pathSplit = p.split("/");
+    const pathSplit = p.path.split("/");
 
     let regexString = "^";
 
@@ -78,8 +79,45 @@ export function GetRegexForPaths(paths: Array<string>) {
 
     regexString += "((\\?)[a-zA-Z0-9=&-_]*)?$";
 
-    return RegExp(regexString);
+    return {
+      id: p.id,
+      regex: RegExp(regexString),
+      method: p.method,
+    };
   });
 
   return regexForPaths;
+}
+
+/**
+ * Since a basic http request comes in chunks we need to parse it.
+ *
+ * It reads the data inside a JSON body and returns an object with
+ * the passed json data.
+ *
+ * TODO implement checks for form-data, x-ww-form-urlencoded, graphQL, binary, text...
+ */
+export async function ParseRequestData(req: IncomingMessage) {
+  const chunks: Uint8Array[] = [];
+  let params: Record<string, string> | undefined = {};
+
+  req.on("data", (chunk) => {
+    chunks.push(chunk);
+  });
+
+  req.on("end", () => {
+    const data = Buffer.concat(chunks);
+    const dataString = data.toString();
+
+    console.log("DS", dataString);
+
+    try {
+      params = JSON.parse(dataString);
+    } catch (err) {
+      console.log(err);
+      params = undefined;
+    }
+  });
+
+  return params;
 }
