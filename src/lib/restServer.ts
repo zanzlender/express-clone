@@ -1,6 +1,6 @@
-import { RestServerProps, RouteProps } from "../types/server";
-import http, { IncomingMessage, ServerResponse } from "http";
-import { GetRegexForPaths, ParseUrlParams, ParseRequestData } from "./parsers";
+import { RestServerProps } from "../types/server";
+import http, { ServerResponse } from "http";
+import { GetRegexForPaths, ParseUrlParams } from "./parsers";
 
 /**
  * Creates a REST server instance.
@@ -98,7 +98,7 @@ async function CreateRestServer(args: RestServerProps) {
         req.on("error", (err) => {
           HandleError(res, 500, "SERVER_ERROR");
         });
-      } else {
+      } else if (req.method === "GET" || req.method === "DELETE") {
         const extendedRequest = {
           ...req,
           params,
@@ -106,6 +106,8 @@ async function CreateRestServer(args: RestServerProps) {
         };
 
         matchingRoute.work(extendedRequest, res);
+      } else {
+        HandleError(res, 405, "METHOD_NOT_ALLOWED");
       }
     } else {
       HandleError(res, 405, "METHOD_NOT_ALLOWED");
